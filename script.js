@@ -1,62 +1,96 @@
-const menus = [
-  {
-    title: "Cozy Mystery Night",
-    desc: "Comfort food perfect for curling up with a whodunit.",
-    items: ["Butternut Squash Soup", "Herb-Roasted Chicken", "Warm Apple Crumble"]
-  },
-  {
-    title: "Romantic Poetry Supper",
-    desc: "Delicate flavors and a touch of candlelight.",
-    items: ["Goat Cheese Salad", "Pan-Seared Salmon with Lemon Beurre Blanc", "Dark Chocolate Mousse"]
-  },
-  {
-    title: "Adventure Travel Feast",
-    desc: "Bold, spicy dishes inspired by far-off places.",
-    items: ["Spiced Chickpea Stew", "Coconut Rice", "Grilled Plantains"]
-  },
-  {
-    title: "Classic Library Tea",
-    desc: "Light bites and warm tea for a quiet evening.",
-    items: ["Cucumber Sandwiches", "Scones with Jam", "Chamomile Tea"]
-  }
-];
+// Book-themed dinner menu generator
+(() => {
+	const themes = {
+		'Cozy Mystery': {
+			starters: ['Roasted Tomato Soup', 'Garlic Bread with Herb Butter', 'Warm Brie and Fig Crostini'],
+			salads: ['Autumn Pear Salad', 'Simple Arugula with Lemon', 'Beet and Goat Cheese Salad'],
+			mains: ['Chicken Pot Pie', 'Shepherdâ€™s Pie', 'Seared Salmon with Dill'],
+			sides: ['Butter Mashed Potatoes', 'Glazed Carrots', 'Sautéed Green Beans'],
+			desserts: ['Apple Crumble', 'Vanilla Pudding', 'Cinnamon Tea Cake']
+		},
+		'Classic Literature': {
+			starters: ['Oysters Rockefeller', 'French Onion Soup', 'Smoked Salmon Blini'],
+			salads: ['Niçoise Salad', 'Waldorf Salad', 'Fennel and Orange Salad'],
+			mains: ['Beef Bourguignon', 'Coq au Vin', 'Lamb with Rosemary'],
+			sides: ['Pommes Dauphinoise', 'Ratatouille', 'Buttered Asparagus'],
+			desserts: ['Crème Brûlée', 'Poached Pears', 'Baked Alaska']
+		},
+		'Fantasy Feast': {
+			starters: ['Spiced Pumpkin Soup', 'Herbed Mushroom Tart', 'Dragonberry Bruschetta'],
+			salads: ['Enchanted Herb Salad', 'Citrus & Pomegranate', 'Forest Mushroom Salad'],
+			mains: ['Roast Beast with Root Vegetables', 'Honey-Glazed Pork Loin', 'Stuffed Portobello Steaks'],
+			sides: ['Roasted Roots', 'Crispy Sage Potatoes', 'Honey-Roasted Turnips'],
+			desserts: ['Honey Cake', 'Spiced Pear Tart', 'Fig & Almond Pastry']
+		},
+		'Modern Fiction': {
+			starters: ['Avocado Toast', 'Spicy Tuna Tartare', 'Crispy Cauliflower Bites'],
+			salads: ['Kale Caesar', 'Quinoa & Cranberry', 'Modern Greek Salad'],
+			mains: ['Pan-Seared Sea Bass', 'Grilled Vegetable Risotto', 'Soy-Glazed Chicken Bowl'],
+			sides: ['Charred Broccolini', 'Truffle Fries', 'Lemon Couscous'],
+			desserts: ['Molten Chocolate Cake', 'Matcha Panna Cotta', 'Lemon Tart']
+		},
+		'Romantic Novels': {
+			starters: ['Prosciutto & Melon', 'Stracciatella Salad', 'Herb Ricotta Crostini'],
+			salads: ['Caprese with Balsamic', 'Baby Greens with Champagne Vinaigrette', 'Strawberry Spinach Salad'],
+			mains: ['Risotto with Asparagus', 'Butter-Poached Lobster', 'Filet Mignon'],
+			sides: ['Truffle Mashed Potatoes', 'Grilled Asparagus', 'Rosemary Roasted Potatoes'],
+			desserts: ['Chocolate-Covered Strawberries', 'Tiramisu', 'Raspberry Soufflé']
+		}
+	};
 
-function createCard(menu) {
-  const card = document.createElement('div');
-  card.className = 'menu-card';
+	function pickRandom(arr) {
+		return arr[Math.floor(Math.random() * arr.length)];
+	}
 
-  const h3 = document.createElement('h3');
-  h3.textContent = menu.title;
-  card.appendChild(h3);
+	function generateMenu(themeName, courses) {
+		const t = themes[themeName] || themes['Cozy Mystery'];
+		const menu = [];
 
-  const p = document.createElement('p');
-  p.textContent = menu.desc;
-  card.appendChild(p);
+		// Starter
+		menu.push({ title: 'Starter', item: pickRandom(t.starters) });
 
-  const ul = document.createElement('ul');
-  ul.className = 'items';
-  menu.items.forEach(i => {
-    const li = document.createElement('li');
-    li.textContent = i;
-    ul.appendChild(li);
-  });
-  card.appendChild(ul);
+		// Optionally salad
+		if (courses >= 4) menu.push({ title: 'Salad', item: pickRandom(t.salads) });
 
-  return card;
-}
+		// Main
+		menu.push({ title: 'Main', item: pickRandom(t.mains) });
 
-function shuffle(arr) {
-  return arr.slice().sort(() => Math.random() - 0.5);
-}
+		// Optionally side
+		if (courses >= 5) menu.push({ title: 'Side', item: pickRandom(t.sides) });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('generate-button');
-  const grid = document.getElementById('menu-grid');
+		// Dessert
+		menu.push({ title: 'Dessert', item: pickRandom(t.desserts) });
 
-  btn.addEventListener('click', () => {
-    // Clear grid
-    grid.innerHTML = '';
-    const chosen = shuffle(menus).slice(0, 3);
-    chosen.forEach(m => grid.appendChild(createCard(m)));
-  });
-});
+		return menu;
+	}
+
+	function renderMenu(menu, themeName) {
+		const container = document.getElementById('menu-result');
+		container.innerHTML = '';
+
+		const title = document.createElement('h3');
+		title.textContent = `${themeName} Menu`;
+		container.appendChild(title);
+
+		menu.forEach((c) => {
+			const div = document.createElement('div');
+			div.className = 'menu-course';
+			div.innerHTML = `<strong>${c.title}:</strong> ${c.item}`;
+			container.appendChild(div);
+		});
+	}
+
+	// Hook up UI
+	document.addEventListener('DOMContentLoaded', () => {
+		const btn = document.getElementById('generate');
+		const themeSel = document.getElementById('theme');
+		const coursesSel = document.getElementById('courses');
+
+		btn.addEventListener('click', () => {
+			const theme = themeSel.value;
+			const courses = parseInt(coursesSel.value, 10) || 3;
+			const menu = generateMenu(theme, courses);
+			renderMenu(menu, theme);
+		});
+	});
+})();

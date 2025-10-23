@@ -5,32 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What's for Dinner?</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="container">
-        <header class="hero">
-            <div class="hero-inner">
-                <img src="_design/girl in library.jpg" alt="Person reading in a library" class="hero-image">
-                <div class="hero-copy">
-                    <h1>Booked for Dinner</h1>
-                    <p class="tagline">Curated, book-themed dinner menus to match your mood and chapter of life</p>
-                    <button class="cta-button" id="generate-button" aria-label="Generate a booked-themed menu">Generate Menu</button>
-                </div>
-            </div>
+        <header>
+            <h1>Bookish Dinner Menus</h1>
+            <p class="tagline">Generate a book-themed menu inspired by cozy libraries and literary moods</p>
         </header>
-
         <main>
-            <section class="menus">
-                <!-- Example menu cards will be inserted by script.js -->
-                <div class="menu-grid" id="menu-grid">
-                    <div class="menu-card placeholder">
-                        <h3>Ready when you are</h3>
-                        <p>Click "Generate Menu" to receive a book-themed dinner idea.</p>
-                    </div>
+            <div class="intro-card">
+                <div class="hero">
+                    <img id="hero-image" src="assets/girl in library.jpg" alt="Girl in library" onerror="this.style.display='none'">
                 </div>
-            </section>
+                <p>Tired of the endless "What should we eat?" debate?</p>
+                <p>Choose a literary theme and we'll assemble a multi-course menu inspired by books.</p>
+                <div class="controls">
+                    <label for="theme">Theme</label>
+                    <select id="theme">
+                        <option>Cozy Mystery</option>
+                        <option>Classic Literature</option>
+                        <option>Fantasy Feast</option>
+                        <option>Modern Fiction</option>
+                        <option>Romantic Novels</option>
+                    </select>
+
+                    <label for="courses">Courses</label>
+                    <select id="courses">
+                        <option value="3">3 (Starter / Main / Dessert)</option>
+                        <option value="4">4 (Add Salad)</option>
+                        <option value="5">5 (Starter / Salad / Main / Side / Dessert)</option>
+                    </select>
+
+                    <button class="cta-button" id="generate">Generate Menu</button>
+                </div>
+
+                <div id="menu-result" class="menu-card" aria-live="polite"></div>
+            </div>
         </main>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
