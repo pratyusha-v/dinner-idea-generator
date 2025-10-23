@@ -4,6 +4,9 @@
     --accent-color: #CD853F;      /* Light brown */
     --text-color: #2C1810;        /* Dark brown */
     --background-color: #FFF8DC;  /* Cream */
+    --muted-bg: #F5F0E6; /* paper-like background */
+    --card-bg: #FFFDF8;
+    --shadow: rgba(44,24,16,0.12);
 }
 
 * {
@@ -24,6 +27,33 @@ body {
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
+}
+
+.hero {
+    background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent 60%);
+    padding: 1rem 0 2rem 0;
+}
+
+.hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-image {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px var(--shadow);
+    border: 6px solid var(--secondary-color);
+}
+
+.hero-copy {
+    max-width: 420px;
+    text-align: left;
 }
 
 header {
@@ -70,4 +100,43 @@ h1 {
 
 .cta-button:hover {
     background-color: var(--accent-color);
+}
+
+/* Menu grid and cards */
+.menus {
+    margin-top: 2rem;
+}
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.menu-card {
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px var(--shadow);
+    text-align: left;
+    border-left: 6px solid var(--secondary-color);
+}
+.menu-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+.menu-card p {
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+.menu-card .items {
+    margin-top: 0.75rem;
+    list-style: none;
+    padding-left: 0;
+}
+.menu-card .items li {
+    padding: 0.25rem 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.04);
+}
+.menu-card.placeholder {
+    opacity: 0.9;
 }

@@ -5,19 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What's for Dinner?</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>What's for Dinner?</h1>
-            <p class="tagline">Let's make your evening meal decision easy and delicious</p>
-        </header>
-        <main>
-            <div class="intro-card">
-                <p>Tired of the endless "What should we eat?" debate?</p>
-                <p>We'll help you discover the perfect dinner idea that matches your mood, time, and ingredients!</p>
-                <button class="cta-button">Get Dinner Ideas</button>
+        <header class="hero">
+            <div class="hero-inner">
+                <img src="_design/girl in library.jpg" alt="Person reading in a library" class="hero-image">
+                <div class="hero-copy">
+                    <h1>Booked for Dinner</h1>
+                    <p class="tagline">Curated, book-themed dinner menus to match your mood and chapter of life</p>
+                    <button class="cta-button" id="generate-button" aria-label="Generate a booked-themed menu">Generate Menu</button>
+                </div>
             </div>
+        </header>
+
+        <main>
+            <section class="menus">
+                <!-- Example menu cards will be inserted by script.js -->
+                <div class="menu-grid" id="menu-grid">
+                    <div class="menu-card placeholder">
+                        <h3>Ready when you are</h3>
+                        <p>Click "Generate Menu" to receive a book-themed dinner idea.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 </body>
